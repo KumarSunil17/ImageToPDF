@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void exportPDF(View view) {
+
         document = new Document(PageSize.A4, 50, 50, 50, 50);
 
         directoryPath = android.os.Environment.getExternalStorageDirectory().toString();
