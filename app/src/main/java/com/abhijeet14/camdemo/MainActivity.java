@@ -2,18 +2,13 @@ package com.abhijeet14.camdemo;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.ImageReader;
 import android.net.Uri;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -22,16 +17,12 @@ import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfWriter;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import javax.xml.parsers.DocumentBuilder;
-
 public class MainActivity extends AppCompatActivity {
+
     ImageView img;
     Bitmap b;
     String directoryPath;
@@ -42,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         img = findViewById(R.id.img);
-
     }
 
     public void capture(View view) {
@@ -79,21 +69,21 @@ public class MainActivity extends AppCompatActivity {
             image = Image.getInstance(directoryPath + "/" + "example.jpg");
             image.setAlignment(Element.ALIGN_CENTER);
 
-            Float width = document.getPageSize().getWidth()-50.0f;
-            Float height = document.getPageSize().getHeight()-50.0f;
+            Float width = document.getPageSize().getWidth()-100.0f;
+            Float height = document.getPageSize().getHeight()-100.0f;
 
             Rectangle rectangle = new Rectangle(width,height);
             image.setAlignment(Element.ALIGN_CENTER);
             image.scaleAbsolute(rectangle);
 
-        } catch (BadElementException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (BadElementException | IOException e) {
             e.printStackTrace();
         }
 
         try {
             document.add(image);
+            document.add(image);
+
             Toast.makeText(this, "Exported", Toast.LENGTH_SHORT).show();
 
         } catch (DocumentException e) {
@@ -108,5 +98,4 @@ public class MainActivity extends AppCompatActivity {
         i.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(i);
     }
-
 }
